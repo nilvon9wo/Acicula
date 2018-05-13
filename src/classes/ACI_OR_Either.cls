@@ -1,4 +1,4 @@
-public abstract class ACI_OR_Either implements ACI_INTF_CollectorLikeIntf, 
+public abstract class ACI_OR_Either implements ACI_COL_CollectorLikeIntf, 
 			ACI_INTF_SerializableIntf,
 			ACI_OPT_OptionableIntf,
 			ACI_STM_Streamable {
@@ -145,7 +145,7 @@ public abstract class ACI_OR_Either implements ACI_INTF_CollectorLikeIntf,
 
 	// Placeholders ---------------------------------------------------------------------------------------------------------
 	
-	public virtual ACI_INTF_CollectorLikeIntf sequence(ACI_INTF_CollectorLikeIntf either) {
+	public virtual ACI_COL_CollectorLikeIntf sequence(ACI_COL_CollectorLikeIntf either) {
 		throw new ACI_EXCP_NotImplementedException('Sequence has not been implemented for Either ... yet.');
 	} 
 

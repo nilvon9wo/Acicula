@@ -1,4 +1,4 @@
-public class ACI_OR_LeftProjection extends ACI_OR_ProjectionAbs implements ACI_INTF_CollectorLikeIntf, ACI_OR_ProjectionIntf {
+public class ACI_OR_LeftProjection extends ACI_OR_ProjectionAbs implements ACI_COL_CollectorLikeIntf, ACI_OR_ProjectionIntf {
    	public ACI_OR_LeftProjection(ACI_OR_Either either) {
    		this(either);
    	}  

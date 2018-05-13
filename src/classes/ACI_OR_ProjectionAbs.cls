@@ -1,5 +1,5 @@
 public abstract class ACI_OR_ProjectionAbs 
-		implements ACI_INTF_CollectorLikeIntf, 
+		implements ACI_COL_CollectorLikeIntf, 
 			ACI_OPT_OptionableIntf,
 			ACI_OR_ProjectionIntf, 
 			ACI_STM_Streamable,  
@@ -96,7 +96,7 @@ public abstract class ACI_OR_ProjectionAbs
 	
 	// Placeholders ---------------------------------------------------------------------------------------------------------
 
-	public virtual ACI_INTF_CollectorLikeIntf sequence(ACI_INTF_CollectorLikeIntf either) {
+	public virtual ACI_COL_CollectorLikeIntf sequence(ACI_COL_CollectorLikeIntf either) {
 		throw new ACI_EXCP_NotImplementedException('Sequence has not been implemented for Projections ... yet.');
 	} 
 	
