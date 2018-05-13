@@ -11,46 +11,46 @@ public class ACI_TRY_Success extends ACI_TRY_Try {
     
     public override Boolean isFailure(){ 
     	return false; 
-    }
+    } 
 
     public override Object get(){ 
-    	return this.value; 
+    	return this.value;  
     }
     
     public override Object checkedGet(){
     	return this.get(); 
     }
 
-    public override void forEach(ACI_FUNC_ObjectToVoidIntf action){
+    public override void forEach(ACI_FUNC_ObjectToVoidIntf action){ 
     	action.apply(this.value);
     }
     
-    public override ACI_TRY_Try nestedMap(ACI_TRY_ObjectToFailableSupplierIntf objectToFailableSupplier) { 
+    public override ACI_TRY_Try nestedMap(ACI_FUNC_ObjectToFailableSupplierIntf objectToFailableSupplier) { 
     	return ACI_TRY_Try.apply(objectToFailableSupplier.apply(this.value)); 
     } 
     
-    public override ACI_TRY_Try flatMap(ACI_TRY_ObjectToFailableSupplierIntf objectToFailableSupplier) { 
+    public override ACI_TRY_Try flatMap(ACI_FUNC_ObjectToFailableSupplierIntf objectToFailableSupplier) { 
     	return ACI_TRY_Try.join(this.nestedMap(objectToFailableSupplier)); 
     } 
     
     public override ACI_TRY_Try filter(ACI_FUNC_ObjectToBooleanIntf predicate){
     	ACI_TRY_Try result = predicate.apply(this.value)
     		? (ACI_TRY_Try) this
-    		: (ACI_TRY_Try) new ACI_TRY_Failure(new ACI_TRY_NoSuchElementException('Predicate does not hold for ' + this.value)); 
+    		: (ACI_TRY_Try) new ACI_TRY_Failure(new ACI_EXCP_NoSuchElementException('Predicate does not hold for ' + this.value)); 
 
     	return ACI_TRY_Try.join(result); 
 	} 
 	
-    public override ACI_TRY_Try recover(ACI_TRY_ObjectToFailableSupplierIntf recoverFunction){ 
+    public override ACI_TRY_Try recover(ACI_FUNC_ObjectToFailableSupplierIntf recoverFunction){ 
     	return this; 
     }
     
-    public override ACI_TRY_Try recoverWith(ACI_TRY_ObjectToFailableSupplierIntf recoverFunction){ 
+    public override ACI_TRY_Try recoverWith(ACI_FUNC_ObjectToFailableSupplierIntf recoverFunction){ 
     	return this; 
     }
     
     public override ACI_TRY_Try failed(){ 
-    	return new ACI_TRY_Failure(new ACI_TRY_UnsupportedOperationException('Success.failed'));
+    	return new ACI_TRY_Failure(new ACI_EXCP_UnsupportedOperationException('Success.failed'));
    	}
 
     public override ACI_OPT_Option toOptional(){ 
@@ -66,8 +66,8 @@ public class ACI_TRY_Success extends ACI_TRY_Try {
     }
 
     public override ACI_TRY_Try transform(
-    		ACI_TRY_ObjectToFailableSupplierIntf successFunction, 
-    		ACI_TRY_ObjectToFailableSupplierIntf failureFunction
+    		ACI_FUNC_ObjectToFailableSupplierIntf successFunction, 
+    		ACI_FUNC_ObjectToFailableSupplierIntf failureFunction
     	){
     	return ACI_TRY_Try.join(ACI_TRY_Try.apply(successFunction.apply(this.value))); 
     }

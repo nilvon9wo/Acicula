@@ -1,10 +1,10 @@
 public class ACI_TRY_Failure extends ACI_TRY_Try { 
 	Exception ex;
-	ACI_TRY_GetOfFailureException unckeckedException;
+	ACI_EXCP_GetOfFailureException unckeckedException;
 	 
 	public ACI_TRY_Failure(Exception ex) { 
 		this.ex = ex;
-		this.unckeckedException = new ACI_TRY_GetOfFailureException(ex);
+		this.unckeckedException = new ACI_EXCP_GetOfFailureException(ex);
 	} 
 	
     public override Boolean isSuccess(){ 
@@ -21,16 +21,16 @@ public class ACI_TRY_Failure extends ACI_TRY_Try {
 	
     public override Object checkedGet(){
     	throw this.ex;
-	}
+	} 
 
     public override void forEach(ACI_FUNC_ObjectToVoidIntf objectToVoidFunction)  {
     }
     
-    public override ACI_TRY_Try nestedMap(ACI_TRY_ObjectToFailableSupplierIntf objectToFailableSupplier){ 
+    public override ACI_TRY_Try nestedMap(ACI_FUNC_ObjectToFailableSupplierIntf objectToFailableSupplier){ 
     	return this; 
     } 
     
-    public override ACI_TRY_Try flatMap(ACI_TRY_ObjectToFailableSupplierIntf objectToFailableSupplier){
+    public override ACI_TRY_Try flatMap(ACI_FUNC_ObjectToFailableSupplierIntf objectToFailableSupplier){
     	return this; 
     }
     
@@ -38,11 +38,11 @@ public class ACI_TRY_Failure extends ACI_TRY_Try {
     	return this; 
     } 
     
-    public override ACI_TRY_Try recover(ACI_TRY_ObjectToFailableSupplierIntf recoverFunction){ 
+    public override ACI_TRY_Try recover(ACI_FUNC_ObjectToFailableSupplierIntf recoverFunction){ 
     	return ACI_TRY_Try.apply(recoverFunction.apply(ex)); 
     }
     
-    public override ACI_TRY_Try recoverWith(ACI_TRY_ObjectToFailableSupplierIntf recoverFunction){
+    public override ACI_TRY_Try recoverWith(ACI_FUNC_ObjectToFailableSupplierIntf recoverFunction){
     	return ACI_TRY_Try.join(this.recover(recoverFunction)); 
    	}
     public override ACI_TRY_Try failed(){ 
@@ -62,8 +62,8 @@ public class ACI_TRY_Failure extends ACI_TRY_Try {
     }
 
     public override ACI_TRY_Try transform(
-    		ACI_TRY_ObjectToFailableSupplierIntf successFunction, 
-    		ACI_TRY_ObjectToFailableSupplierIntf failureFunction
+    		ACI_FUNC_ObjectToFailableSupplierIntf successFunction, 
+    		ACI_FUNC_ObjectToFailableSupplierIntf failureFunction
     	){
     	return ACI_TRY_Try.join(ACI_TRY_Try.apply(failureFunction.apply(this.ex))); 
     }
@@ -85,7 +85,7 @@ public class ACI_TRY_Failure extends ACI_TRY_Try {
     }
 
     public override String toString() {
-	    return 'Failure{' +
+	    return 'Failure{' + 
 	    		'exception=' + this.ex +
 	        '}';
     }

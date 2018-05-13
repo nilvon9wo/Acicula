@@ -5,15 +5,17 @@ public abstract class ACI_OPT_Option
 			ACI_STM_Streamable,
 			Iterable<Object>  
 		{
-
+ 
 	protected ACI_OPT_Option() {} 
 
     public abstract Object get(); 
     public abstract Object getOrElse(Object orElse);
+	public abstract Object getOrElse(ACI_SUPL_SupplierIntf supplier);  
+    public abstract Object getOrError(ACI_SUPL_StringSupplier errorMessageFunction);
+	public abstract Object getOrNull();
+    public abstract Object getOrThrow(ACI_SUPL_ExceptionSupplier errorFunction);
     public abstract ACI_OPT_Option orElse(Object orElse);
-    public abstract Object getOrError(ACI_OPT_ExceptionMessageSupplierIntf errorMessageFunction);
-    public abstract Object getOrThrow(ACI_OPT_ExceptionSupplierIntf errorFunction);
-
+ 
     public abstract Boolean isDefined(); 
     public Boolean isEmpty() { return !isDefined(); }
     public abstract Boolean exists(ACI_FUNC_ObjectToBooleanIntf trueExpression);
@@ -24,7 +26,8 @@ public abstract class ACI_OPT_Option
     	return toList().iterator();  
     }   
 
-    public abstract void foreach(ACI_FUNC_ObjectToVoidIntf unitExpression);
+    public abstract void forEach(ACI_FUNC_ObjectToVoidIntf unitExpression);
+	public ACI_OPT_Option forEach(ACI_INTF_ConsumerIntf consumer) { return null; } // TODO
 
     public abstract ACI_OPT_Option nestedMap(ACI_FUNC_ObjectToOptionIntf mapExpression);
     public abstract ACI_OPT_Option flatMap(ACI_FUNC_ObjectToOptionIntf flatMapExpression);
@@ -42,15 +45,10 @@ public abstract class ACI_OPT_Option
     		: ACI_OPT_Option.some(value); 
     }
 	
-	public Object getOrElse(ACI_SUPL_SupplierIntf supplier) { return null; } // TODO  
-	public Object getOrNull() { return null; } // TODO
-	public Object getOrError(ACI_SUPL_StringSupplier errorMessageFunction) { return null; } // TODO 
-	public Object getOrThrow(ACI_SUPL_ExceptionSupplier errorFunction) { return null; } // TODO 
 
 	public ACI_OPT_Option applyToAll(ACI_FUNC_FunctionIntf function) { return null; } // TODO
 	public ACI_OPT_Option flatApplyToAll(ACI_FUNC_FunctionIntf function) { return null; } // TODO
 	public Boolean forAll(ACI_FUNC_ObjectToBooleanIntf predicate) { return null; } // TODO
-	public ACI_OPT_Option forEach(ACI_INTF_ConsumerIntf consumer) { return null; } // TODO
 
 	public Object fold(ACI_FUNC_FunctionIntf ifLeft, ACI_FUNC_FunctionIntf ifRight) { return null; } // TODO
 	public ACI_OPT_Option bidirectionalApplyToAll(ACI_FUNC_FunctionIntf ifLeft, ACI_FUNC_FunctionIntf ifRight) { return null; } // TODO
