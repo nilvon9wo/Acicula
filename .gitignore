@@ -1,0 +1,10 @@
+.project
+.settings/
+salesforce.schema
+src/aura
+src/components
+src/pages
+src/staticresouces
+src/testSuites
+src/triggers
+
