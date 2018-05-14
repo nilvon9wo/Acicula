@@ -8,7 +8,7 @@ public class ACI_OR_RightProjection extends ACI_OR_ProjectionAbs implements ACI_
 	} 
 
    	public override Boolean isDefined(){ 
-   		return this.either.isRight(); 
+   		return this.either.isRight();  
 	}
     	
     public override Object when(ACI_FUNC_ObjectToObjectIntf objectToObjectFunction) { 
@@ -17,13 +17,13 @@ public class ACI_OR_RightProjection extends ACI_OR_ProjectionAbs implements ACI_
 			: objectToObjectFunction.apply(this.either.left().get());
     }
     	
- 	public override ACI_OR_Either applyToAll(ACI_FUNC_FunctionIntf function) { 
+ 	public override ACI_OR_Either applyToAll(ACI_FUNC_ObjectToObjectIntf function) { 
 		return  this.either.isRight()
 			? (ACI_OR_Either) new ACI_OR_Right(function.apply(this.get()))
 			: (ACI_OR_Either) this.toLeft();
  	}
  	
-	public override ACI_OR_Either flatApplyToAll(ACI_FUNC_FunctionIntf function)  { 
+	public override ACI_OR_Either flatApplyToAll(ACI_FUNC_ObjectToObjectIntf function)  { 
 		return  this.either.isRight()
 			? (ACI_OR_Either) function.apply(this.get())
 			: (ACI_OR_Either) this.toLeft();

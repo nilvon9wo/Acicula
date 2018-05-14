@@ -1,4 +1,4 @@
-public class ACI_FUNC_Constant implements ACI_FUNC_FunctionIntf {
+public class ACI_FUNC_Constant implements ACI_FUNC_ObjectToObjectIntf {
 	Object returnValue;
 	public ACI_FUNC_Constant(Object returnValue) {
 		this.returnValue = returnValue;
@@ -7,4 +7,4 @@ public class ACI_FUNC_Constant implements ACI_FUNC_FunctionIntf {
     public Object apply(Object value) {
     	return this.returnValue;
     }
-}
+} 

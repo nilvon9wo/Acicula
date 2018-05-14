@@ -5,7 +5,7 @@ public abstract class ACI_OPT_Option
 			ACI_STM_Streamable,
 			Iterable<Object>  
 		{
- 
+  
 	protected ACI_OPT_Option() {} 
 
     public abstract Object get(); 
@@ -46,12 +46,12 @@ public abstract class ACI_OPT_Option
     }
 	
 
-	public ACI_OPT_Option applyToAll(ACI_FUNC_FunctionIntf function) { return null; } // TODO
-	public ACI_OPT_Option flatApplyToAll(ACI_FUNC_FunctionIntf function) { return null; } // TODO
+	public ACI_OPT_Option applyToAll(ACI_FUNC_ObjectToObjectIntf function) { return null; } // TODO
+	public ACI_OPT_Option flatApplyToAll(ACI_FUNC_ObjectToObjectIntf function) { return null; } // TODO
 	public Boolean forAll(ACI_FUNC_ObjectToBooleanIntf predicate) { return null; } // TODO
 
-	public Object fold(ACI_FUNC_FunctionIntf ifLeft, ACI_FUNC_FunctionIntf ifRight) { return null; } // TODO
-	public ACI_OPT_Option bidirectionalApplyToAll(ACI_FUNC_FunctionIntf ifLeft, ACI_FUNC_FunctionIntf ifRight) { return null; } // TODO
+	public Object fold(ACI_FUNC_ObjectToObjectIntf ifLeft, ACI_FUNC_ObjectToObjectIntf ifRight) { return null; } // TODO
+	public ACI_OPT_Option bidirectionalApplyToAll(ACI_FUNC_ObjectToObjectIntf ifLeft, ACI_FUNC_ObjectToObjectIntf ifRight) { return null; } // TODO
 	public ACI_OPT_Option toOption() { return null; } // TODO
 	public ACI_OPT_Option toOptional() { return null; } // TODO
 	public ACI_STM_StreamIntf toStream() { return null; } // TODO

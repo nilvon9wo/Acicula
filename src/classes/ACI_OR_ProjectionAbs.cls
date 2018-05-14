@@ -6,7 +6,7 @@ public abstract class ACI_OR_ProjectionAbs
 			Iterable<Object> { 
 				
 	protected ACI_OR_Either either;
-	
+	 
 	public ACI_OR_ProjectionAbs(ACI_OR_Either either) {
 		this.either = either;
 	}
@@ -16,8 +16,8 @@ public abstract class ACI_OR_ProjectionAbs
 
    	public abstract Boolean isDefined();   
     public abstract Object get();   
- 	public abstract ACI_OR_Either applyToAll(ACI_FUNC_FunctionIntf function);
-	public abstract ACI_OR_Either flatApplyToAll(ACI_FUNC_FunctionIntf function);
+ 	public abstract ACI_OR_Either applyToAll(ACI_FUNC_ObjectToObjectIntf function);
+	public abstract ACI_OR_Either flatApplyToAll(ACI_FUNC_ObjectToObjectIntf function);
 	public abstract ACI_OPT_Option filter(ACI_FUNC_ObjectToBooleanIntf predicate); 
 	public abstract ACI_OR_Either sequence(ACI_OR_Either either);
     public abstract Object when(ACI_FUNC_ObjectToObjectIntf objectToObjectFunction);
@@ -100,11 +100,11 @@ public abstract class ACI_OR_ProjectionAbs
 		throw new ACI_EXCP_NotImplementedException('Sequence has not been implemented for Projections ... yet.');
 	} 
 	
-	public virtual Object fold(ACI_FUNC_FunctionIntf ifLeft, ACI_FUNC_FunctionIntf ifRight)  {
+	public virtual Object fold(ACI_FUNC_ObjectToObjectIntf ifLeft, ACI_FUNC_ObjectToObjectIntf ifRight)  {
 		throw new ACI_EXCP_NotImplementedException('Fold has not been implemented for Projections ... yet.');
 	} 
 	
-	public virtual ACI_OR_Either bidirectionalApplyToAll(ACI_FUNC_FunctionIntf ifLeft, ACI_FUNC_FunctionIntf ifRight)  {
+	public virtual ACI_OR_Either bidirectionalApplyToAll(ACI_FUNC_ObjectToObjectIntf ifLeft, ACI_FUNC_ObjectToObjectIntf ifRight)  {
 		throw new ACI_EXCP_NotImplementedException('Bidirectional Apply-To-All has not been implemented for Projections ... yet.');
 	} 
 	

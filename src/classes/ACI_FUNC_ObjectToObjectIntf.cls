@@ -1,3 +1,3 @@
-public interface ACI_FUNC_ObjectToObjectIntf extends ACI_FUNC_FunctionIntf {
+public interface ACI_FUNC_ObjectToObjectIntf {
     Object apply(Object value);
 }

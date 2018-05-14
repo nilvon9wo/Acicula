@@ -26,7 +26,7 @@ public class ACI_OR_EitherHelper {
     
     public static ACI_FUNC_EitherToBooleanIntf isLeft() {
     	return new LeftTest(); 
-    }
+    } 
 
     public class LeftTest implements ACI_FUNC_EitherToBooleanIntf {
     	public Boolean apply(ACI_OR_Either either) { 
@@ -62,7 +62,7 @@ public class ACI_OR_EitherHelper {
     } 
 
     public static ACI_OR_Either upcastLeft(ACI_OR_Either either) {
-    	return either.left().applyToAll(new ACI_Function_Identity()); 
+    	return either.left().applyToAll(new ACI_FUNC_Identity()); 
     } 
     
     public static Iterable<Object> filterLeft(Iterable<ACI_OR_Either> iterable) {
@@ -139,7 +139,7 @@ public class ACI_OR_EitherHelper {
     } 
     
     public static ACI_OR_Either upcastRight(ACI_OR_Either either) {
-    	return either.right().applyToAll(new ACI_Function_Identity()); 
+    	return either.right().applyToAll(new ACI_FUNC_Identity()); 
     } 
 
     public static Iterable<Object> filterRight(Iterable<ACI_OR_Either> iterable) {

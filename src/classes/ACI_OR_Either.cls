@@ -5,15 +5,15 @@ public abstract class ACI_OR_Either implements ACI_COL_CollectorLikeIntf,
     private static final long serialVersionUID = -1L; 
  
     protected ACI_OR_Either() {
-    }
+    } 
        
     // Abstract --------------------------------------------------------------------------------------------------------
     
     public abstract Boolean isLeft();
     public abstract Boolean isRight();
     public abstract ACI_OR_Either swap();
-    public abstract Object fold(ACI_FUNC_FunctionIntf ifLeft, ACI_FUNC_FunctionIntf ifRight);
-    public abstract ACI_OR_Either bidirectionalApplyToAll(ACI_FUNC_FunctionIntf ifLeft, ACI_FUNC_FunctionIntf ifRight);
+    public abstract Object fold(ACI_FUNC_ObjectToObjectIntf ifLeft, ACI_FUNC_ObjectToObjectIntf ifRight);
+    public abstract ACI_OR_Either bidirectionalApplyToAll(ACI_FUNC_ObjectToObjectIntf ifLeft, ACI_FUNC_ObjectToObjectIntf ifRight);
 
 	// Left --------------------------------------------------------------------------------------------------------------
      
@@ -31,7 +31,7 @@ public abstract class ACI_OR_Either implements ACI_COL_CollectorLikeIntf,
     		: rightTransformer.apply(this.right().get());
     }  
     
-    public ACI_OR_Either leftMap(ACI_FUNC_FunctionIntf function) {
+    public ACI_OR_Either leftMap(ACI_FUNC_ObjectToObjectIntf function) {
     	return this.left().applyToAll(function);
     } 
 
@@ -55,7 +55,7 @@ public abstract class ACI_OR_Either implements ACI_COL_CollectorLikeIntf,
     		: leftTransformer.apply(this.left().get());
     }
 
-    public ACI_OR_Either rightMap(ACI_FUNC_FunctionIntf function) {
+    public ACI_OR_Either rightMap(ACI_FUNC_ObjectToObjectIntf function) {
     	return this.right().applyToAll(function);
     }
 
@@ -87,11 +87,11 @@ public abstract class ACI_OR_Either implements ACI_COL_CollectorLikeIntf,
 
 	// Collectors --------------------------------------------------------------------------------------------------------------
 
-	public ACI_OR_Either applyToAll(ACI_FUNC_FunctionIntf function) {
+	public ACI_OR_Either applyToAll(ACI_FUNC_ObjectToObjectIntf function) {
 		return this.right().applyToAll(function);
 	}
 
-	public ACI_OR_Either flatApplyToAll(ACI_FUNC_FunctionIntf function) {
+	public ACI_OR_Either flatApplyToAll(ACI_FUNC_ObjectToObjectIntf function) {
 		return this.right().flatApplyToAll(function);
 	}
 	
@@ -153,14 +153,14 @@ public abstract class ACI_OR_Either implements ACI_COL_CollectorLikeIntf,
 		return either.right().flatApplyToAll(new FlatApplyToAll(this));
 	} 
 	
-	public class FlatApplyToAll implements ACI_FUNC_FunctionIntf {
+	public class FlatApplyToAll implements ACI_FUNC_ObjectToObjectIntf {
 		ACI_OR_Either either;
 		public FlatApplyToAll (ACI_OR_Either either) {
 			this.either = either;
 		} 
 		
 		public ACI_OR_Either apply(Object applyToAll) {
-			return this.either.flatApplyToAll((ACI_FUNC_FunctionIntf) applyToAll); 
+			return this.either.flatApplyToAll((ACI_FUNC_ObjectToObjectIntf) applyToAll); 
 		}
 	}	
 }

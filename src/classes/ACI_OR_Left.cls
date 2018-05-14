@@ -10,7 +10,7 @@ public class ACI_OR_Left extends ACI_OR_Either{
     
     public override Boolean isLeft() {
     	return true; 
-    }
+    } 
     
     public override Boolean isRight()  {
     	return false;
@@ -20,11 +20,11 @@ public class ACI_OR_Left extends ACI_OR_Either{
     	return ACI_OR_Either.right(this.value); 
     }
     
-    public override Object fold(ACI_FUNC_FunctionIntf ifLeft, ACI_FUNC_FunctionIntf ifRight) {
+    public override Object fold(ACI_FUNC_ObjectToObjectIntf ifLeft, ACI_FUNC_ObjectToObjectIntf ifRight) {
     	 return ifLeft.apply((ACI_OR_Either) this.value); 
    	}
    	
-    public override ACI_OR_Either bidirectionalApplyToAll(ACI_FUNC_FunctionIntf ifLeft, ACI_FUNC_FunctionIntf ifRight) {
+    public override ACI_OR_Either bidirectionalApplyToAll(ACI_FUNC_ObjectToObjectIntf ifLeft, ACI_FUNC_ObjectToObjectIntf ifRight) {
     	 return this.left().applyToAll(ifLeft); 
    	} 
     

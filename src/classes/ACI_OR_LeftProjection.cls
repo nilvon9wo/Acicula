@@ -5,7 +5,7 @@ public class ACI_OR_LeftProjection extends ACI_OR_ProjectionAbs implements ACI_C
 
     public override Object get(){ 
 		return this.either.getLeft();   
-	} 
+	}  
 
    	public override Boolean isDefined(){
    		return this.either.isLeft();  
@@ -17,13 +17,13 @@ public class ACI_OR_LeftProjection extends ACI_OR_ProjectionAbs implements ACI_C
 			: objectToObjectFunction.apply(this.either.right().get());
     }
  
- 	public override ACI_OR_Either applyToAll(ACI_FUNC_FunctionIntf function) { 
+ 	public override ACI_OR_Either applyToAll(ACI_FUNC_ObjectToObjectIntf function) { 
 		return  this.either.isLeft()
 			? (ACI_OR_Either) new ACI_OR_Left(function.apply(this.get()))
 			: (ACI_OR_Either) this.toRight();
  	}
  	
-	public override ACI_OR_Either flatApplyToAll(ACI_FUNC_FunctionIntf function)  { 
+	public override ACI_OR_Either flatApplyToAll(ACI_FUNC_ObjectToObjectIntf function)  { 
 		return  this.either.isLeft()
 			? (ACI_OR_Either) function.apply(this.get())
 			: (ACI_OR_Either) this.toRight();
