@@ -4,4 +4,4 @@ public class ACI_EXCP_GetOfFailureException extends Exception {
 	public static ACI_EXCP_GetOfFailureException getInstance(Exception cause) {
 		return new ACI_EXCP_GetOfFailureException(MESSAGE, cause);
 	}    
-} 
+}
