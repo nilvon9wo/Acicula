@@ -74,7 +74,31 @@ public class ACI_OR_EitherHelper {
     		return ACI_OR_EitherHelper.leftMapper().apply((ACI_OR_Either) value);
     	}
     }
-    
+
+	public static ACI_OR_Either sequenceLeft(Iterator<ACI_OR_Either> eitherIterable) {
+    	return sequenceLeft(
+    		eitherIterable, 
+    		ACI_COL_CollectorHelper.collectingAndThen(
+    			ACI_COL_CollectorHelper.toList(), 
+    			new ACI_COL_CollectionHelper.GetUnmodifiableList() 
+    		)
+    	);
+  	}	 
+ 
+	public static  ACI_OR_Either sequenceLeft(Iterator<ACI_OR_Either> eitherIterable, ACI_COL_CollectorIntf collector) {
+	    ACI_COL_AccumulatorIntf accumulator = (ACI_COL_AccumulatorIntf) collector.supplier().get();
+	    
+	    while(eitherIterable.hasNext()) {
+	    	ACI_OR_Either either = eitherIterable.next();
+	      	if (either.isLeft()) { 
+	        	return either.right().coerceTo();   
+	      	}
+	      	collector.accumulator().accept(accumulator, either.left().get()); 
+	    }
+	    return ACI_OR_Either.left(collector.finisher().apply(accumulator)); 
+	}
+
+
     // Right -------------------------------------------------------------------------------------
 
     public static ACI_FUNC_EitherToBooleanIntf isRight() {
@@ -128,6 +152,29 @@ public class ACI_OR_EitherHelper {
     	}
     }
 
+	public static ACI_OR_Either sequenceRight(Iterator<ACI_OR_Either> eitherIterable) {
+    	return sequenceRight(
+    		eitherIterable, 
+    		ACI_COL_CollectorHelper.collectingAndThen(
+    			ACI_COL_CollectorHelper.toList(), 
+    			new ACI_COL_CollectionHelper.GetUnmodifiableList() 
+    		)
+    	);
+  	}	 
+ 
+	public static  ACI_OR_Either sequenceRight(Iterator<ACI_OR_Either> eitherIterable, ACI_COL_CollectorIntf collector) {
+	    ACI_COL_AccumulatorIntf accumulator = (ACI_COL_AccumulatorIntf) collector.supplier().get();
+	    
+	    while(eitherIterable.hasNext()) {
+	    	ACI_OR_Either either = eitherIterable.next();
+	      	if (either.isLeft()) { 
+	        	return either.left().coerceTo();   
+	      	}
+	      	collector.accumulator().accept(accumulator, either.right().get()); 
+	    }
+	    return ACI_OR_Either.right(collector.finisher().apply(accumulator)); 
+	}
+
     // ------------------------------------------------------------------------
     
     
@@ -141,6 +188,4 @@ public class ACI_OR_EitherHelper {
     		return ACI_SUPL_SupplierHelper.createInstanceFor(objectToEither.apply(value));
     	}
     }
-    
-
 }
